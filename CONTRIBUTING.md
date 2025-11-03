@@ -21,7 +21,7 @@ Use GitHub Issues page to submit issues, enhancement requests and discuss ideas.
   -  Include tests that isolate the bug and verifies that it was fixed.
 
 ### New Features
--  If you'd like to add new functionality to this project, describe the problem you want to solve in a [new Issue](https://github.com/tableau/tableau-mcp/issues/new).
+-  If you'd like to add new functionality to this project, describe the problem you want to solve in a [new Issue](https://github.com/tableau/tableau-document-schemas/issues/new).
 -  Issues that have been identified as a feature request will be labelled `enhancement`.
 -  If you'd like to implement the new feature, please wait for feedback from the project
    maintainers before spending too much time writing the code. In some cases, `enhancement`s may
