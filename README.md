@@ -4,56 +4,77 @@ Official XML Schema Definition (XSD) files for Tableau document formats.
 
 ## Overview
 
-This repository provides machine-readable schema definitions for Tableau file formats, enabling developers to:
+This repository contains machine-readable schema definitions (XSD) for the Tableau workbook format (TWB) alongside conceptual information not covered by the XSD. Started in February 2026, these files represent an officially-supported baseline for the TWB format.
 
-- **Validate** Tableau workbooks (`.twb`) against the official schema
-- **Build tools** that programmatically create or modify Tableau documents
+## What's a TWB? What's an XSD?
+- **TWB (Tableau Workbook)**: An XML document describing a Tableau workbook, including its worksheets, dashboards, and stories.
+- **XSD (XML Schema Definition)**: The W3C-recommended method for describing and validating the content and structure of XML documents.
 
+The schemas in this repository provide a reference for developers and agents to build and validate TWBs against an official standard.
 
+## Getting Started & Usage
 
 ### Directory Structure
+Schema are organized into folders by Tableau version using the naming convention `YYYY_R`, where `YYYY` is the year, and `R` is the release number for that year.
 
+**Example:**
 ```
-schemas/
-└── 2026_1/
-    └── twb_2026.1.0.xsd    # Tableau Workbook schema for version 2026.1
+schemas
+└───2026_1
+    └───twb_2026.1.0.xsd    # Tableau Workbook schema for version 2026.1
 ```
 
-Schemas are organized by Tableau version using the naming convention `YYYY_Q/` (year and quarter).
+### Version Compatibility
+When creating or modifying a TWB, ensure that the `original-version` and `version` attributes of the `<workbook>` element correspond with the version of the XSD you are using for validation. Note that the version strings don't match exactly, but correspond like below:
+- TWB version string: `26.1`
+- XSD file: `twb_2026.1.0.xsd`
 
-## Validation
+**Example:**
+```
+<workbook original-version='26.1'
+    source-build='0.0.0 (0000.0.0.0)'
+    source-platform='win'
+    version='26.1'
+    xmlns:user='http://www.tableausoftware.com/xml/user'
+>
+```
 
-The workbook schemas provide **syntactic validation** of Tableau workbook structure — they verify that elements, attributes, and their relationships conform to the expected XML format.
+### Manifest by version
+The `<document-format-change-manifest>` element has historically included a list of features used by the workbook, used by Tableau to determine version compatibility between the TWB and the software that's opening it.
 
-Use these schemas to catch structural issues early, but be aware that a syntactically valid workbook may still contain errors that only surface when opened in Tableau or published to Tableau Server/Cloud.
+To make direct workbook authoring simpler, inside of the `<document-format-change-manifest>` element, use a single `<ManifestByVersion />` element instead. This replaces the complex manual listing of individual features in the document manifest.
 
-## Version Compatibility
+If you use `<ManifestByVersion />` like this, any version of Tableau equal to or greater than the TWB's version shouldn't experience a failure to load due to version incompatibility. Versions of Tableau lower than the TWB's version will not be able to load the TWB.
 
-Workbooks created with newer versions of Tableau may contain elements not present in older schemas. Always use the schema version that matches the Tableau version used to create or last save the workbook.
-
-**Optional:** When creating or modifying a TWB and validating against version X of the XSD, you can set the `original-version` attribute to X and replace the manifest with the `ManifestByVersion` tag. This allows any version of Tableau >= X to load the workbook.
-
-```xml
+**Example:**
+```
 <workbook original-version='26.1' source-build='0.0.0 (0000.0.0.0)' source-platform='win' version='26.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
-  <document-format-change-manifest>
-    <ManifestByVersion />
-  </document-format-change-manifest>
+    <document-format-change-manifest>
+        <ManifestByVersion />
+    </document-format-change-manifest>
 ```
 
-## Community
+## Validating a TWB against the XSD
+To validate your Tableau Workbook (TWB) against the official schema (XSD), use any standard XML validation tool. Since a TWB file is natively XML, you simply point your XML validator to the TWB and the corresponding XSD from this repository.
 
-Have questions, feedback, or ideas? Join the conversation in [GitHub Discussions](https://github.com/tableau/tableau-document-schemas/discussions).
+## Important notes
 
-## Code of Conduct
+### Syntatic versus semantic validation
+The XSD is used for structural (syntactic) validation of a workbook. Successful syntactic validation can't guarantee that a workbook will open in Tableau (semantic validation).
 
-This project adheres to the Salesforce [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+### The XSD offers a baseline for syntactic validation
+The schemas provide a reference for building a structurally-compliant TWB and don't cover the validation of some content. For example, some of the things that aren't validated when using the XSD are:
+- attributes in connection elements
+- calculated field contents, like function names and object references
+- references to other named workbook contents, like tab names
 
-## License
+You can locate XML elements that aren't validated by searching the XSD for `processContents="skip"`.
 
-This project is licensed under the terms specified in [LICENSE.txt](LICENSE.txt).
+### Support limitations
+Sometimes, a workbook passes schema validation (syntactic validation) but fails to load in a Tableau product (semantic validation). Semantic validation failures like this aren't covered by Tableau technical support.
 
----
+### No TWBX Support
+The schemas do not support building or validating packaged workbook files (TWBX).
 
-<p align="center">
-  <sub>Maintained by <a href="https://www.tableau.com">Tableau</a>, a Salesforce company</sub>
-</p>
+## Contributing
+See the **Contributing** tab.

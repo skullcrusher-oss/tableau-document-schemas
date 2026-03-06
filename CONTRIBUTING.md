@@ -1,38 +1,22 @@
 # Contributing Guide For Tableau Document Schemas
 
-This page lists the operational governance model of this project, as well as the recommendations and requirements for how to best contribute to {PROJECT}. We strive to obey these as best as possible. As always, thanks for contributing – we hope these guidelines make it easier and shed some light on our approach and processes.
+This page lists the operational governance model of this project, as well as the recommendations and requirements for how to best contribute to Tableau Document Schemas. We strive to obey these as best as possible. As always, thanks for contributing – we hope these guidelines make it easier and shed some light on our approach and processes.
 
 # Governance Model
 
 ## Salesforce Sponsored
 
-The intent and goal of open sourcing this project is to increase the contributor and user base. However, only Salesforce employees will be given `admin` rights and will be the final arbitrars of what contributions are accepted or not.
+The intent and goal of open sourcing this project is to increase user base. However, only Salesforce employees will be given `admin` rights and will be the final arbitrars of what contributions are accepted or not.
 
-# Issues, requests & ideas
+# Issues & Bug Reports
 
-Use GitHub Issues page to submit issues, enhancement requests and discuss ideas.
+Before submitting an issue or bug report, search the **Issues & Bug Reports** category of the [Discussions](https://github.com/tableau/tableau-document-schemas/discussions) page. If the issue or bug hasn't been reported, create a new **Issues & Bug Reports** discussion. Ensure your description is clear and has sufficient instructions to be able to reproduce the issue or bug.
 
-### Bug Reports and Fixes
--  If you find a bug, please search for it in the [Issues](https://github.com/{project_slug}/issues), and if it isn't already tracked,
-   [create a new issue](https://github.com/{project_slug}/issues/new). Fill out the "Bug Report" section of the issue template. Even if an Issue is closed, feel free to comment and add details, it will still
-   be reviewed.
--  Issues that have already been identified as a bug (note: able to reproduce) will be labelled `bug`.
--  If you'd like to submit a fix for a bug, [send a Pull Request](#creating_a_pull_request) and mention the Issue number.
-  -  Include tests that isolate the bug and verifies that it was fixed.
+Note: The *traditional* GitHub **Issues** page for this repository is hidden and not monitored.
 
-### New Features
--  If you'd like to add new functionality to this project, describe the problem you want to solve in a [new Issue](https://github.com/tableau/tableau-document-schemas/issues/new).
--  Issues that have been identified as a feature request will be labelled `enhancement`.
--  If you'd like to implement the new feature, please wait for feedback from the project
-   maintainers before spending too much time writing the code. In some cases, `enhancement`s may
-   not align well with the project objectives at the time.
+# Enhancement Requests
+ If you'd like to add new functionality to this project, describe the problem you want to solve in a new post to the **Ideas** category of the  [Discussions](https://github.com/tableau/tableau-document-schemas/discussions) page. Ensure your request is clear and has sufficient detail.
 
-# Issues
-We use GitHub issues to track public bugs. Please ensure your description is
-clear and has sufficient instructions to be able to reproduce the issue.
+# Discussions
 
-# Code of Conduct
-Please follow our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-# License
-By contributing your code, you agree to license your contribution under the terms of our project [LICENSE](LICENSE.txt) and to sign the [Salesforce CLA](https://cla.salesforce.com/sign-cla)
+Use the **General**, **Q&A**, and **Show and Tell** [Discussions](https://github.com/tableau/tableau-document-schemas/discussions) categories to get public help, ask questions, and discuss the schema and its usage.
