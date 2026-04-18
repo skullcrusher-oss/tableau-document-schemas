@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Stub XSD for the Tableau `user` namespace referenced by the official TWB
+  schema. The public TWB XSD declares `<xs:import namespace="..."/>` without a
+  schemaLocation and references `user:UserAttributes-AG`, so we need a
+  definition locally to make validation resolvable. An empty attribute group
+  imposes no constraints and matches real TWB files in the wild.
+-->
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.tableausoftware.com/xml/user"
+    xmlns="http://www.tableausoftware.com/xml/user"
+    elementFormDefault="qualified">
+  <xs:attributeGroup name="UserAttributes-AG">
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:attributeGroup>
+</xs:schema>

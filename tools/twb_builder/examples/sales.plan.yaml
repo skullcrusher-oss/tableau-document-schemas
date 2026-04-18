@@ -1,0 +1,157 @@
+version: 1
+twb_version: '26.1'
+source_build: 20261.26.0211.1127
+source_platform: linux
+datasource:
+  name: sales
+  caption: sales (csv)
+  type: csv
+  path: examples/sales.csv
+  connection:
+    class: textscan
+    filename: /home/user/tableau-document-schemas/tools/twb_builder/examples/sales.csv
+    directory: /home/user/tableau-document-schemas/tools/twb_builder/examples
+    server: ''
+  fields:
+  - name: '[order_date]'
+    caption: Order Date
+    role: dimension
+    datatype: date
+    type: ordinal
+    aggregation: ''
+  - name: '[region]'
+    caption: Region
+    role: dimension
+    datatype: string
+    type: nominal
+    aggregation: ''
+  - name: '[product]'
+    caption: Product
+    role: dimension
+    datatype: string
+    type: nominal
+    aggregation: ''
+  - name: '[sales]'
+    caption: Sales
+    role: measure
+    datatype: real
+    type: quantitative
+    aggregation: Sum
+  - name: '[profit]'
+    caption: Profit
+    role: measure
+    datatype: real
+    type: quantitative
+    aggregation: Sum
+sheets:
+- name: Total Sales
+  mark: Text
+  cols: []
+  rows:
+  - SUM([sales])
+  encodings:
+    tooltip: []
+  filters: []
+- name: Sales by Region
+  mark: Bar
+  cols:
+  - '[region]'
+  rows:
+  - SUM([sales])
+  encodings:
+    color: '[region]'
+    tooltip: []
+  filters: []
+  sort:
+    field: '[region]'
+    direction: descending
+    by: SUM([sales])
+- name: Sales by Product
+  mark: Bar
+  cols:
+  - '[product]'
+  rows:
+  - SUM([sales])
+  encodings:
+    color: '[product]'
+    tooltip: []
+  filters: []
+  sort:
+    field: '[product]'
+    direction: descending
+    by: SUM([sales])
+- name: Sales over Time
+  mark: Line
+  cols:
+  - YEAR([order_date])
+  - MONTH([order_date])
+  rows:
+  - SUM([sales])
+  encodings:
+    tooltip: []
+  filters: []
+- name: Profit vs Sales
+  mark: Circle
+  cols:
+  - SUM([sales])
+  rows:
+  - SUM([profit])
+  encodings:
+    color: '[region]'
+    tooltip: []
+  filters: []
+- name: 'Sales: Region x Product'
+  mark: Square
+  cols:
+  - '[region]'
+  rows:
+  - '[product]'
+  encodings:
+    color: SUM([sales])
+    tooltip: []
+  filters: []
+dashboards:
+- name: Overview
+  size:
+    sizing_mode: automatic
+    minwidth: 800
+    minheight: 600
+    maxwidth: 1600
+    maxheight: 1200
+  zones:
+  - id: 4
+    x: 0
+    y: 0
+    w: 500
+    h: 200
+    sheet: Total Sales
+  - id: 5
+    x: 500
+    y: 0
+    w: 500
+    h: 200
+    sheet: Sales by Region
+  - id: 6
+    x: 0
+    y: 200
+    w: 500
+    h: 400
+    sheet: Sales by Product
+  - id: 7
+    x: 500
+    y: 200
+    w: 500
+    h: 400
+    sheet: Sales over Time
+  - id: 8
+    x: 0
+    y: 600
+    w: 500
+    h: 400
+    sheet: Profit vs Sales
+  - id: 9
+    x: 500
+    y: 600
+    w: 500
+    h: 400
+    sheet: 'Sales: Region x Product'

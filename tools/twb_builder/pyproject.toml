@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "twb-builder"
+version = "0.1.0"
+description = "Heuristic + LLM generator for Tableau .twb workbooks"
+requires-python = ">=3.10"
+dependencies = [
+  "lxml>=5.2",
+  "pandas>=2.1",
+  "openpyxl>=3.1",
+  "pyyaml>=6.0",
+  "pydantic>=2.6",
+  "typer>=0.12",
+  "anthropic>=0.40",
+]
+
+[project.optional-dependencies]
+hyper = ["tableauhyperapi>=0.0.20000"]
+dev = ["pytest>=8.0", "pytest-cov"]
+
+[project.scripts]
+twb-builder = "twb_builder.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["twb_builder"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
