@@ -13,10 +13,11 @@ _AGG_RE = re.compile(r"^(SUM|AVG|COUNT|COUNTD|MIN|MAX|MEDIAN|STDEV|VAR)\((\[[^\[
 _DATE_RE = re.compile(r"^(YEAR|QUARTER|MONTH|WEEK|DAY|HOUR|MINUTE|SECOND)\((\[[^\[\]]+\])\)$", re.I)
 
 
-def build_worksheet(sheet: SheetSpec, plan: Plan) -> etree._Element:
+def build_worksheet(sheet: SheetSpec, plan: Plan, number: int) -> etree._Element:
     ws = el("worksheet", name=sheet.name)
     ws.append(_build_table(sheet, plan))
     ws.append(el("simple-id", uuid=new_uuid()))
+    ws.append(el("worksheet-number", number=number))
     return ws
 
 
@@ -70,7 +71,7 @@ def _build_panes(sheet: SheetSpec, ds: DataSourceSpec) -> etree._Element:
     inner_view = el("view")
     inner_view.append(el("breakdown", value="auto"))
     pane.append(inner_view)
-    pane.append(el("mark", **{"class": sheet.mark}))
+    pane.append(el("mark", **{"class": sheet.mark, "type": sheet.mark}))
 
     enc = sheet.encodings
     if any([enc.color, enc.size, enc.text, enc.tooltip]):

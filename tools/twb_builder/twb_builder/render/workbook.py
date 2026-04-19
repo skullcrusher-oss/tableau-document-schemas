@@ -32,8 +32,8 @@ def render_twb(plan: Plan) -> bytes:
     # <worksheets>
     if plan.sheets:
         worksheets = etree.SubElement(root, "worksheets")
-        for s in plan.sheets:
-            worksheets.append(build_worksheet(s, plan))
+        for i, s in enumerate(plan.sheets):
+            worksheets.append(build_worksheet(s, plan, number=i))
 
     # <dashboards>
     if plan.dashboards:
